@@ -12,7 +12,7 @@ resource "google_storage_bucket" "data_lake" {
   project = var.project_id
   location = var.region
 
-  storage_class = "REGIONAL" # other options are MULTI_REGIONAL, STANDARD, NEARLINE, COLDLINE
+  storage_class = "MULTI_REGIONAL" # other options are MULTI_REGIONAL, STANDARD, NEARLINE, COLDLINE, REGIONAL, ARCHIVE
 
   force_destroy = true # defines if the bucket object should be deleted when the resource is destroyed
 
@@ -20,9 +20,9 @@ resource "google_storage_bucket" "data_lake" {
 
   #NOT WORKING FOR NOW  Error reading bucket after creation: googleapi: 
   #                     Error 400: Bucket is requester pays bucket but no 
-  #                     user project provided., required
+  #                     user project provided., required (you change it to false)
 
-  requester_pays = false # defines if the requester pays for the storage when pulling objects from the bucket
+  # requester_pays = true # defines if the requester pays for the storage when pulling objects from the bucket
   
   # retention policy for how long objects in the bucket should be retained.
   ##NOTE:## Versioning and retention policy can't be used together
@@ -90,11 +90,19 @@ resource "google_storage_bucket_iam_policy" "data_lake_policy" {
   "bindings": [
     {
       "members": [
-        "allAuthenticatedUsers"
+        "group:data2bots-tech-team@data2bots.com"
       ],
-      "role": "roles/storage.objectViewer"
+      "role": "roles/storage.admin"
     }
   ]
 }
 POLICY
 }
+
+# resource "google_storage_bucket_iam_binding" "bucket_iam" {
+#   bucket = google_storage_bucket.data_lake.name
+#   role = "roles/storage.buckets.getIamPolicy"
+#   members = [
+#     "allAuthenticatedUsers"
+#   ]
+# }

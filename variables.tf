@@ -7,11 +7,11 @@ variable "project_id" {
 variable "region" {
   type = string
   description = "region"
-  default = "us-central1"
+  default = "US"
 }
 
 variable "bucket_name" {
   type = string
   description = "bucket name to be added {project_id}"
-  default = "testing-infra"
+  default = "testing-infra-2"
 }
