@@ -42,9 +42,9 @@ resource "google_storage_bucket" "data_lake" {
   }
   lifecycle {
     ignore_changes = [
-      "force_destroy",
-      "requester_pays",
-      "uniform_bucket_level_access"
+      force_destroy,
+      requester_pays,
+      uniform_bucket_level_access
     ]
   }
   # define the data lifecycle management policy
