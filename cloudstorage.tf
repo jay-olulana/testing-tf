@@ -19,10 +19,11 @@ resource "google_storage_bucket" "data_lake" {
   uniform_bucket_level_access = true # defines the bucket level access policy
 
   requester_pays = true # defines if the requester pays for the storage when pulling objects from the bucket
-
+  
+  # retention policy for how long objects in the bucket should be retained.
   retention_policy {
     is_locked = false
-    retention_period = 90 # defines the retention period in days
+    retention_period = 90 # defines the retention period in seconds
   }
   
 #   encryption {
