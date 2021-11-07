@@ -9,3 +9,8 @@ variable "region" {
   description = "region"
   default = "us-central1"
 }
+
+variale "bucket_name" {
+  type = string
+  description = "bucket name to be added {project_id}"
+  default = "testing+infra"
