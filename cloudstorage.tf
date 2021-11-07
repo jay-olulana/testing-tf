@@ -18,14 +18,18 @@ resource "google_storage_bucket" "data_lake" {
 
   uniform_bucket_level_access = true # defines the bucket level access policy
 
-  requester_pays = true # defines if the requester pays for the storage when pulling objects from the bucket
+  #NOT WORKING FOR NOW  Error reading bucket after creation: googleapi: 
+  #                     Error 400: Bucket is requester pays bucket but no 
+  #                     user project provided., required
+
+  requester_pays = false # defines if the requester pays for the storage when pulling objects from the bucket
   
   # retention policy for how long objects in the bucket should be retained.
-  ### Versioning and retention policy can't be used together
-  retention_policy {
-    is_locked = false
-    retention_period = 90 # defines the retention period in seconds
-  }
+  ##NOTE:## Versioning and retention policy can't be used together
+  # retention_policy {
+  #   is_locked = false
+  #   retention_period = 90 # defines the retention period in seconds
+  # }
   
 #   encryption {
 #     # defines the encryption settings for the bucket

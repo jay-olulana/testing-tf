@@ -13,5 +13,5 @@ variable "region" {
 variable "bucket_name" {
   type = string
   description = "bucket name to be added {project_id}"
-  default = "testing+infra"
+  default = "testing-infra"
 }
