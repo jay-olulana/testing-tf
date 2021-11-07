@@ -1,5 +1,5 @@
 locals {
-  bucket_name = format("%s-%s", var.project_id, var.region)
+  bucket_name = format("%s-%s", var.project_id, var.bucket_name)
 }
 
 ##########################################
@@ -21,6 +21,7 @@ resource "google_storage_bucket" "data_lake" {
   requester_pays = true # defines if the requester pays for the storage when pulling objects from the bucket
   
   # retention policy for how long objects in the bucket should be retained.
+  ### Versioning and retention policy can't be used together
   retention_policy {
     is_locked = false
     retention_period = 90 # defines the retention period in seconds
@@ -46,6 +47,14 @@ resource "google_storage_bucket" "data_lake" {
       age = 365
     }
   }
+  
+  # define the website configuration if the bucket is to be used as a website??
+  # cors {
+  #   max_age_seconds = 3600
+  #   allowed_methods = ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"]
+  #   allowed_origins = ["*"]
+  #   allowed_headers = ["*"]
+  # }
   
   # defines if we want versioning or not
   versioning {
